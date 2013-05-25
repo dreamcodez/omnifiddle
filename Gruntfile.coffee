@@ -1,5 +1,5 @@
 cp = require 'child_process'
-{daemon, exec} = require 'shelljs'
+{exec} = require 'shelljs'
 
 module.exports = (grunt) ->
   watchOptions =
@@ -25,10 +25,16 @@ module.exports = (grunt) ->
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
 
+  pid = null
   grunt.registerTask 'server', 'run server', ->
-    exec 'killall -9 omnifiddle'
+    if pid
+      killCmd = 'kill -9 ' + pid
+      console.log killCmd
+      exec(killCmd)
+
     work = ->
-      cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
+      {pid} = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
+
     setTimeout work, 1000 # need to bind to same socket again, so wait
 
   grunt.registerTask 'all', ['clientjade', 'browserify', 'server']
