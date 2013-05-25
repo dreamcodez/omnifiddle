@@ -4,5 +4,8 @@
   { "clientjade": "*"
   , "connect": "*"
   , "express": "*"
+  , "grunt": "*"
+  , "grunt-contrib-watch": "*"
+  , "shelljs": "*"
   }
 }
