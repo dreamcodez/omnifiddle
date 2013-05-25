@@ -11,6 +11,7 @@ const max-age = 0ms
 const path = \public
 
 const scripts =
+  * '/js/raf.js'
   * '/js/zepto.js'
   * '/js/history/json2.js'
   * '/js/history/history.adapter.zepto.js'
