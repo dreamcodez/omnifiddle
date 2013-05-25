@@ -10,33 +10,42 @@ html
   body
     //- markup / style will be live preview
     //- code will be 'run'
-    fieldset.pane
-      legend
-        label
-          | Markup
-          select
-            option HTML
-            option Jade
-      textarea#markup
-    fieldset.pane
-      legend
-        label
-          | Style
-          select
-            option CSS
-            option Stylus
-      textarea#style
-    fieldset.pane
-      legend
-        label
-          | Code
-          select
-            option JavaScript
-            option CoffeeScript
-            option LiveScript
-            option Roy
-            option ClojureScript
-      textarea#code
-    fieldset.pane
-      legend Preview
-      #preview
+    div
+      fieldset.pane
+        legend
+          label
+            | Markup
+            select
+              option HTML
+              option Jade
+        textarea#markup
+      fieldset.pane
+        legend
+          label
+            | Style
+            select
+              option CSS
+              option Stylus
+        textarea#style
+      div(style='clear:both')
+    div
+      fieldset.pane
+        legend
+          label
+            | Code
+            select
+              option JavaScript
+              option CoffeeScript
+              option LiveScript
+              option Roy
+              option ClojureScript
+              option LOLcode
+              option Brainfuck
+              option Malbolge
+        textarea#code
+      fieldset.pane
+        legend Preview
+        #preview
+      div(style='clear:both')
+    div
+      button#submit Can Has Result?
