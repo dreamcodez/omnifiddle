@@ -1,0 +1,8 @@
+{ "name": "omnifiddle"
+, "version": "0.0.69"
+, "dependencies":
+  { "clientjade": "*"
+  , "connect": "*"
+  , "express": "*"
+  }
+}

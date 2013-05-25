@@ -1,0 +1,2 @@
+#!/bin/sh -e
+lsc -e 'require("./server").run!'

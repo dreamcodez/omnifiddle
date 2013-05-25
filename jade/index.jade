@@ -1,0 +1,17 @@
+!!! 5
+html
+  head
+    title Main
+    link(rel='stylesheet', type='text/css', href='assets/style/style.css')
+    script(type='text/javascript', src='node_modules/montage/montage.js')
+    script(type='text/montage-serialization')
+      |{ "owner":
+      |  { "prototype": "montage/ui/loader.reel",
+      |  , "properties":
+      |    { "mainModule": "ui/main.reel"
+      |    , "mainName": "Main"
+      |    }
+      |  }
+      |}
+  body
+    .Main(data-montage-id='main') Hello World
