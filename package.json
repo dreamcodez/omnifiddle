@@ -8,6 +8,7 @@
   , "grunt": "*"
   , "grunt-contrib-watch": "*"
   , "liveify": "*"
+  , "LiveScript": "*"
   , "reactivejs": "http://github.com/mattbaker/Reactive.js/archive/master.tar.gz"
   , "shelljs": "*"
   }

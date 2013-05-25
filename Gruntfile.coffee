@@ -33,15 +33,16 @@ module.exports = (grunt) ->
     exec 'mkdir -p public/css'
     exec 'stylus styl/app.styl -o public/css'
 
-  child = null
   grunt.registerTask 'server', 'run server', ->
-    if child
-      process.kill(child)
+    serious = '(ಠ_ಠ) (ಠ_ಠ)'
+    boom    = ' ¯\\_(ツ)_/¯'
 
-    work = ->
-      child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
+    console.log "\n  [ #{boom} ] Killing server BRO!"
+    exec 'echo'
+    exec 'killall -9 omnifiddle'
 
-    setTimeout work, 500 # need to bind to same socket again, so wait
+    child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
+    console.log "\n  [ #{serious} ] Server started SIR! #{JSON.stringify(pid: child.pid)}"
 
   grunt.registerTask 'all', ['clientjade', 'browserify', 'stylus', 'server']
 
