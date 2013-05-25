@@ -2,16 +2,10 @@
 html
   head
     title Main
-    link(rel='stylesheet', type='text/css', href='assets/style/style.css')
-    script(type='text/javascript', src='node_modules/montage/montage.js')
-    script(type='text/montage-serialization')
-      |{ "owner":
-      |  { "prototype": "montage/ui/loader.reel",
-      |  , "properties":
-      |    { "mainModule": "ui/main.reel"
-      |    , "mainName": "Main"
-      |    }
-      |  }
-      |}
+    link(rel='stylesheet', type='text/css', href='app.css')
+    script(type='text/javascript', src='/js/head.load.js')
+    |<script type="text/javascript">
+    |  head.js.apply(head, !{JSON.stringify(scripts)});
+    |</script>
   body
     .Main(data-montage-id='main') Hello World
