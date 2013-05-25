@@ -3,12 +3,12 @@
 module.exports = (grunt) ->
   grunt.initConfig
     watch:
-      clientjade:
+      jade:
         files: ['jade/*.jade']
         tasks: ['clientjade']
-      browserify:
+      javascript:
         files: ['ls/*.ls', 'build/clientjade.js']
-        tasks: ['browserify']
+        tasks: ['browserify', 'server']
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
@@ -19,6 +19,10 @@ module.exports = (grunt) ->
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
 
-  grunt.registerTask 'all', ['clientjade', 'browserify']
+  grunt.registerTask 'server', 'run server', ->
+    exec 'killall -9 omnifiddle > /dev/null'
+    exec 'bin/server'
+
+  grunt.registerTask 'all', ['clientjade', 'browserify', 'server']
 
   grunt.registerTask 'default', ['all', 'watch']
