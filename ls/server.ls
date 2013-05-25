@@ -1,7 +1,10 @@
 require! {
   connect
   express
+  cj: '../build/clientjade'
 }
+
+const t = cj.templates
 
 const max-age = 0ms
 
@@ -10,7 +13,8 @@ const path = \public
 const process-title = \omnifiddle
 
 !function homepage-handler req, res, next
-  res.send '404', 404
+  res.content-type \html
+  res.send t.index!
 
 export run = (port = 8000) ->
   process.title = process-title

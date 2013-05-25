@@ -1,2 +1,2 @@
 #!/bin/sh -e
-lsc -e 'require("./server").run!'
+lsc -e 'require("./ls/server").run!'
