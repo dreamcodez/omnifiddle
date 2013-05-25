@@ -1,11 +1,13 @@
 { "name": "omnifiddle"
 , "version": "0.0.69"
 , "dependencies":
-  { "clientjade": "*"
+  { "browserify": "*"
+  , "clientjade": "*"
   , "connect": "*"
   , "express": "*"
   , "grunt": "*"
   , "grunt-contrib-watch": "*"
+  , "liveify": "*"
   , "shelljs": "*"
   }
 }
