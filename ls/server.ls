@@ -17,6 +17,7 @@ const scripts =
   * '/js/history/history.adapter.zepto.js'
   * '/js/history/history.html4.js'
   * '/js/history/history.js'
+  * '/js/loljs.js'
   * '/js/app.js'
 
 !function homepage-handler req, res, next
