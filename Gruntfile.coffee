@@ -3,8 +3,8 @@ cp = require 'child_process'
 
 module.exports = (grunt) ->
   watchOptions =
-    interrupt: true
-    debounceDelay: 100
+    interrupt: false
+    debounceDelay: 35
 
   grunt.initConfig
     watch:
@@ -16,27 +16,33 @@ module.exports = (grunt) ->
         files: ['ls/*.ls', 'build/clientjade.js']
         tasks: ['browserify', 'server']
         options: watchOptions
+      stylus:
+        files: ['styl/*.styl']
+        tasks: ['stylus']
+        options: watchOptions
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'browserify', 'generate browser bundle', ->
+  grunt.registerTask 'browserify', 'generate browser js bundle', ->
     exec 'node_modules/.bin/browserify -d -t liveify ls/entry.ls -o public/js/app.js'
 
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
 
-  pid = null
+  grunt.registerTask 'stylus', 'generate css from stylus sheets', ->
+    exec 'mkdir -p public/css'
+    exec 'stylus styl/app.styl -o public/css'
+
+  child = null
   grunt.registerTask 'server', 'run server', ->
-    if pid
-      killCmd = 'kill -9 ' + pid
-      console.log killCmd
-      exec(killCmd)
+    if child
+      process.kill(child)
 
     work = ->
-      {pid} = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
+      child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
 
-    setTimeout work, 1000 # need to bind to same socket again, so wait
+    setTimeout work, 500 # need to bind to same socket again, so wait
 
-  grunt.registerTask 'all', ['clientjade', 'browserify', 'server']
+  grunt.registerTask 'all', ['clientjade', 'browserify', 'stylus', 'server']
 
   grunt.registerTask 'default', ['all', 'watch']

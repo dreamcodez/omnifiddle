@@ -2,10 +2,41 @@
 html
   head
     title Main
-    link(rel='stylesheet', type='text/css', href='app.css')
+    link(rel='stylesheet', type='text/css', href='/css/app.css')
     script(type='text/javascript', src='/js/head.load.js')
     |<script type="text/javascript">
     |  head.js.apply(head, !{JSON.stringify(scripts)});
     |</script>
   body
-    .Main(data-montage-id='main') Hello World
+    //- markup / style will be live preview
+    //- code will be 'run'
+    fieldset.pane
+      legend
+        label
+          | Markup
+          select
+            option HTML
+            option Jade
+      textarea#markup
+    fieldset.pane
+      legend
+        label
+          | Style
+          select
+            option CSS
+            option Stylus
+      textarea#style
+    fieldset.pane
+      legend
+        label
+          | Code
+          select
+            option JavaScript
+            option CoffeeScript
+            option LiveScript
+            option Roy
+            option ClojureScript
+      textarea#code
+    fieldset.pane
+      legend Preview
+      #preview
