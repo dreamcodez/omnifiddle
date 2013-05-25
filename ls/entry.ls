@@ -1,8 +1,6 @@
 require! {
-  cj : '../build/clientjade.js'
+  t: '../build/clientjade.js'
+  $R: reactivejs
 }
 
-window.foo = 69
-
-window <<< {cj}
-
+#$R.state
