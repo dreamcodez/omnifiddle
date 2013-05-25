@@ -20,8 +20,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'browserify', 'generate browser bundle', ->
-    exec 'mkdir -p public'
-    exec 'node_modules/.bin/browserify -d -t liveify ls/entry.ls -o public/app.js'
+    exec 'node_modules/.bin/browserify -d -t liveify ls/entry.ls -o public/js/app.js'
 
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
