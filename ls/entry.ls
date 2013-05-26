@@ -1,7 +1,8 @@
 require! {
   t: \../build/clientjade.js
   $R: reactivejs
-  \./tinker-component
+  tinker: \./tinker-component.ls
 }
 
+window.tinker = tinker
 #$R.state
