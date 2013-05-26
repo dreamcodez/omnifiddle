@@ -2,43 +2,29 @@
   //- markup / style will be live preview
   //- code will be 'run'
   div
-    fieldset.pane
-      legend
-        label
-          | Markup
-          select.markup-flavor
-            option HTML
-            option Jade
-      textarea.markup
-    fieldset.pane
-      legend
-        label
-          | Style
-          select.style-flavor
-            option CSS
-            option Stylus
-      .tabs
-        tab = {group: 'style', title: 'Title 1', checked: true}
-        include tab
-          textarea.style
-          p Content 1
-      //-textarea.style-out
+    type = 'markup'
+    flavors = [['HTML', 'html'], ['Jade', 'jade']]
+    include lang-pane
+
+    type = 'style'
+    flavors = [['CSS', 'css'], ['Stylus', 'stylus']]
+    include lang-pane
+
     div(style='clear:both')
   div
-    fieldset.pane
-      legend
-        label
-          | Code
-          select.code-flavor
-            option(value='javascript') JavaScript
-            option CoffeeScript
-            option LiveScript
-            option Roy
-            option ClojureScript
-            option(value='lolcode') LOLcode
-            option Brainfuck
-            option Malbolge
-      textarea.code
+    type = 'code'
+    - var flavors =
+    -   [ ['JavaScript', 'javascript']
+    -   , ['CoffeeScript', 'coffeescript']
+    -   , ['LiveScript', 'livescript']
+    -   , ['Roy', 'roy']
+    -   , ['ClojureScript', 'clojurescript']
+    -   , ['LOLcode', 'lolcode']
+    -   , ['Brainfuck', 'brainfuck']
+    -   , ['Malbolge', 'malbolge']
+    -   ]
+    include lang-pane
+
     fieldset.pane
       legend Preview
       iframe.preview

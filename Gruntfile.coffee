@@ -40,6 +40,7 @@ module.exports = (grunt) ->
     console.log "\n  [ #{boom} ] Killing server BRO!"
     exec 'echo'
     exec 'killall -9 omnifiddle'
+    exec 'sleep 1'
 
     child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
     console.log "\n  [ #{serious} ] Server started SIR! #{JSON.stringify(pid: child.pid)}"

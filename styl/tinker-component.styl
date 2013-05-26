@@ -20,11 +20,18 @@
     margin 20px auto
     padding 15px 30px
 
+  //- TODO: split out into different file for tabs
   .tabs
     position relative
     min-height 200px
     clear both
     margin 25px 0
+
+    //- output is always hidden on pageload, we need to use the client js vm to generate the output html/css/js
+    //- then it will be shown...
+    //- this is specific to tinker-component
+    .tab.markup-out, .tab.style-out, .tab.code-out
+      display: none
 
   .tab
     float left
