@@ -60,11 +60,21 @@ function new-reactor $top
 
 export create = ($top) ->
   {r, activate, deactivate} = new-reactor $top
+
+  pw = $(\iframe.preview).0.content-window
+  $preview = $(pw.document).find(\body)
+
   {
     start: ->
       $R(cl \markup, _).bind-to r.markup
       $R(cl \style, _).bind-to r.style
       $R(cl \code, _).bind-to r.code
+
+      $R((markup) ->
+        $preview.html(markup)
+        cl \markup, _
+      ).bind-to r.markup
+
       activate!
     stop: ->
       deactivate!
