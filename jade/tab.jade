@@ -2,7 +2,7 @@
 //- tweaking the css hurts my brain so whatever, unique id for now
 uniqueId = Math.random().toString().replace('.','')
 .tab
-  input(type='radio', id=uniqueId, name=group)
-  label(for=uniqueId)= title
+  input(type='radio', id=uniqueId, name=tab.group, checked=tab.checked)
+  label(for=uniqueId)= tab.title
   .content
     yield
