@@ -1,8 +1,13 @@
 require! {
   t: \../build/clientjade.js
-  $R: reactivejs
+  reactivejs
   tinker: \./tinker-component.ls
+  lodash
 }
 
 window.tinker = tinker
-#$R.state
+window.$R = reactivejs
+window.__ = lodash
+
+tc = tinker.create $(document)
+tc.start!

@@ -1,6 +1,7 @@
-function decorate-handlers $top, handlers
-  for h in handlers
-    {} <<< h <<< {$el: $top.find h.selector}
+require! $R: reactivejs
+
+!function cl
+  console.log ...arguments
 
 !function activate-handlers $top, handlers
   for h in handlers
@@ -10,18 +11,36 @@ function decorate-handlers $top, handlers
   for h in handlers
     $top.off h.type, h.selector, h.on
 
-export create = ($top) ->
-  cl = -> console.log arguments
+function new-reactor $top
+  debounce = __.debounce _, 250
+
+  r =
+    markup: $R.state!
+    markup-flavor: $R.state!
+    style: $R.state!
+    style-flavor: $R.state!
+    code: $R.state!
+    code-flavor: $R.state!
+
   handlers =
     * selector: \.markup
       type: \keyup
-      on: cl
+      on: debounce -> r.markup $(this).val!
+    * selector: \.markup-flavor
+      type: \change
+      on: debounce -> r.markup-flavor $(this).val!
     * selector: \.style
       type: \keyup
-      on: cl
+      on: debounce -> r.style $(this).val!
+    * selector: \.style-flavor
+      type: \change
+      on: debounce -> r.style-flavor $(this).val!
     * selector: \.code
       type: \keyup
-      on: cl
+      on: debounce -> r.code $(this).val!
+    * selector: \.code-flavor
+      type: \change
+      on: debounce -> r.code-flavor $(this).val!
     * selector: \.preview
       type: \keyup
       on: cl
@@ -30,10 +49,23 @@ export create = ($top) ->
       on: cl
 
   {
-    start: ->
-      decorate-handlers $top, handlers
+    activate: ->
       activate-handlers $top, handlers
 
-    stop: ->
+    deactivate: ->
       deactivate-handlers $top, handlers
+
+    r
+  }
+
+export create = ($top) ->
+  {r, activate, deactivate} = new-reactor $top
+  {
+    start: ->
+      $R(cl \markup, _).bind-to r.markup
+      $R(cl \style, _).bind-to r.style
+      $R(cl \code, _).bind-to r.code
+      activate!
+    stop: ->
+      deactivate!
   }
