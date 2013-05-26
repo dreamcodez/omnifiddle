@@ -6,13 +6,13 @@ fieldset.pane
   legend
     label
       span= capitalize(type)
-      select(class=type + '-out')
+      select(class=type + '-flavor')
         each flavor in flavors
           option(value=flavor[1])= flavor[0]
   .tabs
     tab = {group: type, title: title, checked: true}
     include tab
-      textarea.style
+      textarea(class=type) 
 
     tab = {group: type, title: asmTitle + ' (output)', class: type + '-out'}
     include tab

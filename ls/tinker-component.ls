@@ -72,12 +72,9 @@ export create = ($top) ->
 
   {
     start: ->
-      $R(cl \markup, _).bind-to r.markup
       $R(cl \style, _).bind-to r.style
-      $R(cl \code, _).bind-to r.code
       $R(cl \markup-flavor, _).bind-to r.markup-flavor
       $R(cl \style-flavor, _).bind-to r.style-flavor
-      $R(cl \code-flavor, _).bind-to r.code-flavor
 
       $R((markup) ->
         $preview.html(markup)
