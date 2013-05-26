@@ -1,6 +1,7 @@
 require! {
-  t: '../build/clientjade.js'
+  t: \../build/clientjade.js
   $R: reactivejs
+  \./tinker-component
 }
 
 #$R.state
