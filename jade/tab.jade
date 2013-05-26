@@ -1,0 +1,8 @@
+//- I have to nest radio button inside label if i don't want to generate a unique id
+//- tweaking the css hurts my brain so whatever, unique id for now
+uniqueId = Math.random().toString().replace('.','')
+.tab
+  input(type='radio', id=uniqueId, name=group)
+  label(for=uniqueId)= title
+  .content
+    yield

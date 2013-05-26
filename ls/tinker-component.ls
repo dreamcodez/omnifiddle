@@ -11,16 +11,22 @@ require! $R: reactivejs
   for h in handlers
     $top.off h.type, h.selector, h.on
 
+function to-js flavor, code
+  switch flavor
+  | \javascript => code
+  | \lolcode => loljs code
+  | otherwise throw new Error "code flavor '#{flavor}' not implemented"
+
 function new-reactor $top
   debounce = __.debounce _, 250
 
   r =
-    markup: $R.state!
-    markup-flavor: $R.state!
-    style: $R.state!
-    style-flavor: $R.state!
-    code: $R.state!
-    code-flavor: $R.state!
+    markup: $R.state $top.find(\.markup).val!
+    markup-flavor: $R.state $top.find(\.markup-flavor).val!
+    style: $R.state $top.find(\.style).val!
+    style-flavor: $R.state $top.find(\.style-flavor).val!
+    code: $R.state $top.find(\.code).val!
+    code-flavor: $R.state $top.find(\.code-flavor).val!
 
   handlers =
     * selector: \.markup
@@ -77,6 +83,12 @@ export create = ($top) ->
         $preview.html(markup)
         cl \markup, _
       ).bind-to r.markup
+
+      $R((flavor, code)->
+        console.log \flavor, flavor
+        console.log \code, code
+        console.log \js, to-js(flavor, code)
+      ).bind-to r.code-flavor, r.code
 
       activate!
     stop: ->
