@@ -14,6 +14,7 @@ export define = ({
   template = void
   mutate = (->)
   attach = (->)
+  detach = (->)
 } = {}) ->
   create = (initial-locals = {}) ->
     # wrap locals into reactive variables
@@ -37,8 +38,12 @@ export define = ({
         $c.html!
 
       attach: !->
-        # attach reactivity events etc on client
+        # attach reactivity and events on client
         attach $c, state
+
+      detach: !->
+        # detach reactivity and events on client
+        detach $c, state
 
       state
       get-locals
