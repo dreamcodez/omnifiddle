@@ -21,32 +21,32 @@ function new-reactor $top
   debounce = __.debounce _, 250
 
   r =
-    markup: $R.state $top.find(\.markup).val!
-    markup-flavor: $R.state $top.find(\.markup-flavor).val!
-    style: $R.state $top.find(\.style).val!
-    style-flavor: $R.state $top.find(\.style-flavor).val!
-    code: $R.state $top.find(\.code).val!
-    code-flavor: $R.state $top.find(\.code-flavor).val!
+    markup: $R.state $top.find(\textarea.markup).val!
+    markup-flavor: $R.state {title: $top.find('.select.markup-flavor option:checked').text!, type: $top.find('select.markup-flavor').val!}
+    style: $R.state $top.find(\textarea.style).val!
+    style-flavor: $R.state {title: $top.find('.select.style-flavor option:checked').text!, type: $top.find('select.style-flavor').val!}
+    code: $R.state $top.find(\textarea.code).val!
+    code-flavor: $R.state {title: $top.find('.select.code-flavor option:checked').text!, type: $top.find('select.code-flavor').val!}
 
   handlers =
-    * selector: \.markup
+    * selector: \textarea.markup
       type: \keyup
       on: debounce -> r.markup $(this).val!
-    * selector: \.markup-flavor
+    * selector: \select.markup-flavor
       type: \change
-      on: debounce -> r.markup-flavor $(this).val!
-    * selector: \.style
+      on: debounce -> r.markup-flavor {type: $(this).val!, title: $(this).find('option:checked').text!}
+    * selector: \textarea.style
       type: \keyup
       on: debounce -> r.style $(this).val!
-    * selector: \.style-flavor
+    * selector: \select.style-flavor
       type: \change
-      on: debounce -> r.style-flavor $(this).val!
-    * selector: \.code
+      on: debounce -> r.style-flavor {type: $(this).val!, title: $(this).find('option:checked').text!}
+    * selector: \textarea.code
       type: \keyup
       on: debounce -> r.code $(this).val!
-    * selector: \.code-flavor
+    * selector: \select.code-flavor
       type: \change
-      on: debounce -> r.code-flavor $(this).val!
+      on: debounce -> r.code-flavor {type: $(this).val!, title: $(this).find('option:checked').text!}
     * selector: \.preview
       type: \keyup
       on: cl
@@ -67,24 +67,28 @@ function new-reactor $top
 export create = ($top) ->
   {r, activate, deactivate} = new-reactor $top
 
+  # cached selectors
   pw = $(\iframe.preview).0.content-window
   $preview = $(pw.document).find(\body)
 
+  $markup-flavor-label = $top.find '.tab.markup label'
+  $style-flavor-label = $top.find '.tab.style label'
+  $code-flavor-label = $top.find '.tab.code label'
+
   {
     start: ->
-      $R(cl \style, _).bind-to r.style
-      $R(cl \markup-flavor, _).bind-to r.markup-flavor
-      $R(cl \style-flavor, _).bind-to r.style-flavor
+      $R(-> $markup-flavor-label.text(it.title)).bind-to r.markup-flavor
+      $R(-> $style-flavor-label.text(it.title)).bind-to r.style-flavor
+      $R(-> $code-flavor-label.text(it.title)).bind-to r.code-flavor
 
       $R((markup) ->
         $preview.html(markup)
-        cl \markup, _
       ).bind-to r.markup
 
       $R((flavor, code)->
         console.log \flavor, flavor
         console.log \code, code
-        console.log \js, to-js(flavor, code)
+        console.log \js, to-js(flavor.type, code)
       ).bind-to r.code-flavor, r.code
 
       activate!
