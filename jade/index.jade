@@ -8,5 +8,4 @@ html
     |  head.js.apply(head, !{JSON.stringify(scripts)});
     |</script>
   body
-    #tinker
-      include tinker-component
+    #test!= testComponent.render()

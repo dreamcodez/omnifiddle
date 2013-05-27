@@ -37,11 +37,11 @@ export define = ({
 
         $c.html!
 
-      attach: !->
+      attach: !($c) ->
         # attach reactivity and events on client
         attach $c, state
 
-      detach: !->
+      detach: !($c) ->
         # detach reactivity and events on client
         detach $c, state
 

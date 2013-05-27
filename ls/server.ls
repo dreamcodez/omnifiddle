@@ -2,6 +2,7 @@ require! {
   connect
   express
   cj: '../build/clientjade'
+  \./test-component
 }
 
 const t = cj.templates
@@ -22,7 +23,8 @@ const scripts =
 
 !function homepage-handler req, res, next
   res.content-type \html
-  res.send t.index({scripts})
+  locals = {scripts, test-component: test-component.create!}
+  res.send t.index(locals)
 
 export run = (port = 8000) ->
   process.title = \omnifiddle

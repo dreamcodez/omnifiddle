@@ -6,7 +6,7 @@ require! {
   lodash
 }
 
-window.tinker = tinker
+#window.tinker = tinker
 window.$R = reactivejs
 window.__ = lodash
 
@@ -14,5 +14,8 @@ window.__ = lodash
 #tc.start!
 
 tc = test-component.create!
-$(document.body).html tc.render!
+$tc-container = $('#test')
+tc.attach $tc-container
+# not needed on clientside since server provided markup
+#$tc-container.html tc.render!
 
