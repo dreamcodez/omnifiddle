@@ -24,6 +24,10 @@ describe 'new Component' !->
     _it "should return {}" !->
       assert.deep-equal {}, c.state!
 
+  describe ".render!", !->
+    _it "should return ''" !->
+      assert.equal '', c.render!
+
 describe 'new Component {foo: "bar"}' !->
   describe 'stub', !->
     _it 'stub2' !->
