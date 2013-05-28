@@ -15,9 +15,9 @@ scripts =
 
 module.exports =
   class HomePage extends Component
-    (state = {}, selector) ->
-      state <<< {scripts}
-      super state, selector
+    ->
+      super ...
+      @merge-state {scripts}
 
     children:
       * new LangPane {flavors: [[\HTML \html]]} \#markup_pane

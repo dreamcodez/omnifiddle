@@ -9,13 +9,14 @@ debounce = lodash.debounce _, 250
 
 module.exports =
   class LangPane extends Component
-    (state, selector) ->
-      new-state = {input: '', output: ''} <<< state
-      super new-state, selector
+    ->
+      super ...
+      @merge-state {input: '', output: ''}
 
     template: templates.LangPane
     mutate: !($c, state) ->
     attach: ->
-      @$top.on \keyup 'textarea.input' -> console.log 'say my name say my name, you acting kinda shady aint callin me baby why the sudden change?'
+      @$top.on \keyup, \textarea.input, debounce ->
+        @r.input $(@).val!
     detach: !->
       @$top.off!

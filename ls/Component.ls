@@ -10,7 +10,8 @@ else
 module.exports =
   class Component
     (state, @selector) ->
-      @r-state = {[k, $R.state v] for k,v of state}
+      @merge-state state
+
       @$top = $ @selector
 
       # auto-attach on client only and only when @$top is defined
@@ -26,7 +27,14 @@ module.exports =
     children: [] # override in sub-class as needed
     attach: !-> # override in sub-class as needed (client only)
     detach: !-> # override in sub-class as needed (client only)
-    state: -> {[k, v.get!] for k,v of @r-state}
+    merge-state: !(state) ->
+      @r ||= {}
+      for k,v of state
+        if existing-r = @r[k]
+          existing-r v # set rather than override hash key
+        else
+          @r[k] = $R.state v
+    state: -> {[k, v.get!] for k,v of @r}
     render: ->
       state = @state!
       # Render js template
