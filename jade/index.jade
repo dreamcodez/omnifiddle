@@ -6,7 +6,7 @@ html
     script(type='text/javascript', src='/js/head.load.js')
     |<script type="text/javascript">
     |  head.js.apply(head, !{JSON.stringify(scripts)});
-    |  window.hwState = !{JSON.stringify(hw.state())}
+    |  window.lpState = !{JSON.stringify(lp.state())}
     |</script>
   body
-    #test!= hw.html
+    #test!= lp.html

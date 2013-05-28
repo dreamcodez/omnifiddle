@@ -1,8 +1,9 @@
 //- I have to nest radio button inside label if i don't want to generate a unique id
 //- tweaking the css hurts my brain so whatever, unique id for now
-uniqueId = Math.random().toString().replace('.','')
+tabUniqueId = Math.random().toString().replace('.','')
+
 .tab(class=tab.class)
-  input(type='radio', id=uniqueId, name=tab.group, checked=tab.checked)
-  label(for=uniqueId)= tab.title
+  input(type='radio', id=tabUniqueId, name=tab.group, checked=tab.checked)
+  label(for=tabUniqueId)= tab.title
   .content
     yield

@@ -2,7 +2,7 @@ require! {
   connect
   express
   cj: '../build/clientjade'
-  \./HelloWorld
+  \./LangPane
 }
 
 const t = cj.templates
@@ -23,8 +23,8 @@ const scripts =
 
 !function homepage-handler req, res, next
   res.content-type \html
-  hw = new HelloWorld {name: \Sancho}
-  locals = {scripts, hw: hw}
+  lp = new LangPane {flavors: [[\CSS \css]]}
+  locals = {scripts, lp}
   res.send t.index(locals)
 
 export run = (port = 8000) ->

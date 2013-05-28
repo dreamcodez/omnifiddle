@@ -4,11 +4,11 @@
   div
     type = 'markup'
     flavors = [['HTML', 'html'], ['Jade', 'jade']]
-    include lang-pane
+    include LangPane
 
     type = 'style'
     flavors = [['CSS', 'css'], ['Stylus', 'stylus']]
-    include lang-pane
+    include LangPane
 
     div(style='clear:both')
   div
@@ -23,7 +23,7 @@
     -   , ['Brainfuck', 'brainfuck']
     -   , ['Malbolge', 'malbolge']
     -   ]
-    include lang-pane
+    include LangPane 
 
     fieldset.pane
       legend Preview

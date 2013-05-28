@@ -2,7 +2,7 @@ require! {
   t: \../build/clientjade.js
   reactivejs
   lodash
-  \./HelloWorld.ls
+  \./LangPane.ls
 }
 
 #window.tinker = tinker
@@ -13,8 +13,7 @@ window.__ = lodash
 #tc.start!
 
 #tc = test-component.create!
-hw = new HelloWorld window.hw-state, $('#test')
-console.log hw.html
+lp = new LangPane window.lp-state, $('#test')
 #hw.put!
 # not needed on clientside since server provided markup
 #$tc-container.html tc.render!
