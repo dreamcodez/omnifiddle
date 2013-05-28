@@ -1,6 +1,7 @@
 require! {
   \./Component.ls
   lodash
+  $R: reactivejs
 }
 
 debounce = lodash.debounce _, 250
@@ -11,12 +12,17 @@ module.exports =
   class LangPane extends Component
     ->
       super ...
+
       @merge-state {input: '', output: ''}
+
+      $R(-> console.log ...arguments).bind-to @r.input
 
     template: templates.LangPane
     mutate: !($c, state) ->
     attach: ->
-      @$top.on \keyup, \textarea.input, debounce ->
-        @r.input $(@).val!
+      r = @r
+      @$top.on \keyup \textarea.input debounce(->
+        r.input $(@).val!
+      )
     detach: !->
       @$top.off!
