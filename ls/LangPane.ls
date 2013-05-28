@@ -13,9 +13,15 @@ module.exports =
     ->
       super ...
 
-      @merge-state {input: '', output: ''}
+      @merge-state {input: ''}
 
       $R(-> console.log ...arguments).bind-to @r.input
+      # XXX: todo, create reactive fun out that turns it into output form
+      # then create another reactive fun which consumes the output and
+      # places it in the output pane
+      #
+      # and finally yet another reactive fun which binds also to the output
+      # and updates the preview pane
 
     template: templates.LangPane
     mutate: !($c, state) ->
