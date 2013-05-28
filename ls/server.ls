@@ -13,7 +13,7 @@ path = \public
 
 !function homepage-handler req, res, next
   res.content-type \html
-  res.send (new HomePage).html
+  res.send (new HomePage).render!
 
 export run = (port = 8000) ->
   process.title = \omnifiddle

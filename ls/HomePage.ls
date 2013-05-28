@@ -15,9 +15,9 @@ scripts =
 
 module.exports =
   class HomePage extends Component
-    (state = {}, $top) ->
+    (state = {}, selector) ->
       state <<< {scripts}
-      super state, $top
+      super state, selector
 
     children:
       * new LangPane {flavors: [[\HTML \html]]} \#markup_pane
@@ -28,13 +28,5 @@ module.exports =
 
     mutate: !($c, state) ->
       for c in @children
-        $c.find(c.selector).html c.html
-
-    attach: !->
-      for c in @children
-        c.attach!
-
-    detach: !->
-      for c in @children
-        c.detach!
+        $c.find(c.selector).html c.render!
 

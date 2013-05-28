@@ -1,5 +1,5 @@
 require! {
-  \./ls/HomePage.ls
+  \./HomePage.ls
 }
 
 new HomePage {}, $(\#content)

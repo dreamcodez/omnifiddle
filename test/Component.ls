@@ -26,16 +26,20 @@ describe 'new Component' !->
       assert.deep-equal {}, c.state!
 
   describe ".html", !->
+    _it "should be void" !->
+      assert.equal void, c.html
+
+  describe ".render!", !->
+    _it "should return ''" !->
+      assert.equal '', c.render!
+
+  describe ".html should now be '' after rendering", !->
     _it "should be ''" !->
       assert.equal '', c.html
 
   describe ".put", !->
-    _it "should throw NoDollarTopError" !->
-      errtype = Component.NoDollarTopError
-
-      # so we know this is not undefined before using it in argument below
-      assert errtype
-      assert.throws c.put, errtype
+    _it "should throw Error" !->
+      assert.throws c.put
 
 describe "new Component {} $content" !->
   describe '.put' !->

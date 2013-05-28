@@ -8,17 +8,17 @@ _it = it
 describe 'new HelloWorld' ->
   h = new HelloWorld
 
-  describe ".html" ->
+  describe ".render!" ->
     markup = '<p>Hello, World</p>'
 
-    _it "should be '#{markup}'" ->
-      assert.equal h.html, markup
+    _it "should return '#{markup}'" ->
+      assert.equal h.render!, markup
 
 describe "new HelloWorld {name:'Matt'}" ->
   h = new HelloWorld {name: 'Matt'}
 
-  describe ".html" ->
+  describe ".render!" ->
     markup = '<p>Hello, World</p> <strong>Matt</strong>'
 
-    _it "should be '#{markup}'" ->
-      assert.equal h.html, markup
+    _it "should return '#{markup}'" ->
+      assert.equal h.render!, markup
