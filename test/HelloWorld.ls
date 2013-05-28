@@ -18,7 +18,7 @@ describe "new HelloWorld {name:'Matt'}" ->
   h = new HelloWorld {name: 'Matt'}
 
   describe ".render!" ->
-    markup = '<p>Hello, World</p> <strong>Matt</strong>'
+    markup = '<p>Hello, World</p> <strong>Matt!</strong>'
 
     _it "should return '#{markup}'" ->
       assert.equal h.render!, markup
