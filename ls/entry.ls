@@ -2,4 +2,4 @@ require! {
   \./HomePage.ls
 }
 
-new HomePage {}, $(\#content)
+window.hp = new HomePage {}, $(\#content)

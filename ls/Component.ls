@@ -12,6 +12,19 @@ module.exports =
     (state, @selector) ->
       @merge-state state
 
+      # bind passed in state to render by default
+      # this gives us 'reactive programming for free with jade'
+      # but its not optimal necessarily...
+      #
+      # in the future look into an option to bypass this for manual dom manip
+      # i.e. can be overridden by the programmer
+      r-put = $R ~>
+        @render!
+        @put!
+
+      for ,r-var of @r
+        r-put.bind-to r-var
+
       @$top = $ @selector
 
       # auto-attach on client only and only when @$top is defined
