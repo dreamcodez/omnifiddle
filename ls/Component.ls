@@ -30,8 +30,8 @@ module.exports =
       # DON'T put it in the DOM (programmer should do that with .put and raf)
       @render!
 
-      # auto-attach on client only
-      if window?
+      # auto-attach on client only and only when @$top is defined
+      if window? and @$top
         # attach delegated event handlers
         # we do not put the output in @$top yet because
         # we want to yield this functionality to something smarter

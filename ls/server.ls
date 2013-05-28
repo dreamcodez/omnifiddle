@@ -2,7 +2,7 @@ require! {
   connect
   express
   cj: '../build/clientjade'
-  \./test-component
+  \./HelloWorld
 }
 
 const t = cj.templates
@@ -23,7 +23,8 @@ const scripts =
 
 !function homepage-handler req, res, next
   res.content-type \html
-  locals = {scripts, test-component: test-component.create!}
+  hw = new HelloWorld {name: \Sancho}
+  locals = {scripts, hw: hw}
   res.send t.index(locals)
 
 export run = (port = 8000) ->

@@ -6,6 +6,7 @@ html
     script(type='text/javascript', src='/js/head.load.js')
     |<script type="text/javascript">
     |  head.js.apply(head, !{JSON.stringify(scripts)});
+    |  window.hwState = !{JSON.stringify(hw.state())}
     |</script>
   body
-    #test!= testComponent.render()
+    #test!= hw.html
