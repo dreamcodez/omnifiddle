@@ -50,6 +50,9 @@ module.exports =
       #   DOM manipulation can be done here
       @mutate $c, state
 
+      for child in @children
+        $c.find(child.selector).html child.render!
+
       # finally store html markup
       # pre-calculate and store s
       @html = $c.html!

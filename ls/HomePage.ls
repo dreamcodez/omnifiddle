@@ -25,8 +25,3 @@ module.exports =
       * new LangPane {flavors: [[\JavaScript \javascript]]} \#code_pane
 
     template: templates.HomePage
-
-    mutate: !($c, state) ->
-      for c in @children
-        $c.find(c.selector).html c.render!
-
