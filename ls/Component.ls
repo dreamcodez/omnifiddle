@@ -7,6 +7,27 @@ if window?
 else
   require! $:cheerio
 
+!function bench subject-name, subject-body
+  bef = new Date
+  subject-body!
+  aft = new Date
+  set-timeout(_, 1) ->
+    dur = aft - bef
+    console.log "benchmarked '#{subject-name}': took #{dur}ms"
+
+# like inner html, except super rice
+# mutant has lots of entropy so we can avoid the teardown performance hit
+# http://blog.stevenlevithan.com/archives/faster-than-innerhtml
+!function replace-html $el, html
+  if window?
+    el = $el.0
+    new-el = el.clone-node false
+    new-el.inner-HTML = html
+    el.parent-node.replace-child new-el, el
+  else
+    # server side cheerio does the normal thing
+    $el.html html
+
 module.exports =
   class Component
     (state, @selector) ->
@@ -19,8 +40,15 @@ module.exports =
       # in the future look into an option to bypass this for manual dom manip
       # i.e. can be overridden by the programmer
       r-put = $R ~>
-        @render!
-        @put!
+        bench "#{@@display-name} (RENDER)" ~> @render!
+
+        put = ~>
+          bench "#{@@display-name} (PUT)" ~> @put!
+
+        if raf = window?request-animation-frame
+          raf put
+        else
+          put!
 
       for ,r-var of @r
         r-put.bind-to r-var
@@ -71,5 +99,5 @@ module.exports =
       # pre-calculate and store s
       @html = $c.html!
     put: !-> # put in @$top (client only)
-      @$top.html(@html or @render!)
+      replace-html(@$top, @html or @render!)
 
