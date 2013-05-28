@@ -39,7 +39,7 @@ module.exports =
         @attach!
 
     template: (-> '')
-    mutate: !->
+    mutate: !-> # override in sub-class as needed (client only)
     attach: !-> # override in sub-class as needed (client only)
     detach: !-> # override in sub-class as needed (client only)
     state: -> {[k, v.get!] for k,v of @r-state}
