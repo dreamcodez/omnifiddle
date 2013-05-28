@@ -13,8 +13,10 @@ window.__ = lodash
 #tc.start!
 
 #tc = test-component.create!
-lp = new LangPane window.lp-state, $('#test')
+window.component =
+  markup-pane: new LangPane window.state.code-pane, $('#markup_pane')
+  style-pane: new LangPane window.state.code-pane, $('#style_pane')
+  code-pane: new LangPane window.state.code-pane, $('#code_pane')
 #hw.put!
 # not needed on clientside since server provided markup
 #$tc-container.html tc.render!
-

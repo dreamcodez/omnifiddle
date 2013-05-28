@@ -6,7 +6,9 @@ html
     script(type='text/javascript', src='/js/head.load.js')
     |<script type="text/javascript">
     |  head.js.apply(head, !{JSON.stringify(scripts)});
-    |  window.lpState = !{JSON.stringify(lp.state())}
+    |  window.state = !{JSON.stringify(state)};
     |</script>
   body
-    #test!= lp.html
+    #markup_pane!= component.markup.html
+    #style_pane!= component.style.html
+    #code_pane!= component.code.html

@@ -23,8 +23,16 @@ const scripts =
 
 !function homepage-handler req, res, next
   res.content-type \html
-  lp = new LangPane {flavors: [[\CSS \css]]}
-  locals = {scripts, lp}
+
+  component =
+    markup: new LangPane {flavors: [[\CSS \css]]}
+    style: new LangPane {flavors: [[\CSS \css]]}
+    code: new LangPane {flavors: [[\CSS \css]]}
+
+  state = {[name, c.state!] for name,c of component}
+
+  locals = {scripts, component, state}
+
   res.send t.index(locals)
 
 export run = (port = 8000) ->
