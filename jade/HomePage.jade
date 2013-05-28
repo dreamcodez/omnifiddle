@@ -1,0 +1,13 @@
+!!! 5
+html
+  head
+    title Main
+    link(rel='stylesheet', type='text/css', href='/css/app.css')
+    script(type='text/javascript', src='/js/head.load.js')
+    |<script type="text/javascript">
+    |  head.js.apply(head, !{JSON.stringify(scripts)});
+    |</script>
+  body
+    #markup_pane
+    #style_pane
+    #code_pane

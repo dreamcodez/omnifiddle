@@ -2,38 +2,18 @@ require! {
   connect
   express
   cj: '../build/clientjade'
-  \./LangPane
+  \./HomePage
 }
 
-const t = cj.templates
+t = cj.templates
 
-const max-age = 0ms
+max-age = 0ms
 
-const path = \public
-
-const scripts =
-  * '/js/raf.js'
-  * '/js/zepto.js'
-  * '/js/history/json2.js'
-  * '/js/history/history.adapter.zepto.js'
-  * '/js/history/history.html4.js'
-  * '/js/history/history.js'
-  * '/js/loljs.js'
-  * '/js/app.js'
+path = \public
 
 !function homepage-handler req, res, next
   res.content-type \html
-
-  component =
-    markup: new LangPane {flavors: [[\CSS \css]]}
-    style: new LangPane {flavors: [[\CSS \css]]}
-    code: new LangPane {flavors: [[\CSS \css]]}
-
-  state = {[name, c.state!] for name,c of component}
-
-  locals = {scripts, component, state}
-
-  res.send t.index(locals)
+  res.send (new HomePage).html
 
 export run = (port = 8000) ->
   process.title = \omnifiddle
