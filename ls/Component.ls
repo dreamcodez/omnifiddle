@@ -19,18 +19,11 @@ module.exports =
         # we do not put the output in @$top yet because
         # we want to yield this functionality to something smarter
         # which can use request-animation frame
-        @attach-children!
         @attach!
 
     template: (-> '')
     mutate: !-> # override in sub-class as needed
     children: [] # override in sub-class as needed
-    attach-children: !->
-      for c in @children
-        c.attach!
-    detach-children: !->
-      for c in @children
-        c.detach!
     attach: !-> # override in sub-class as needed (client only)
     detach: !-> # override in sub-class as needed (client only)
     state: -> {[k, v.get!] for k,v of @r-state}
