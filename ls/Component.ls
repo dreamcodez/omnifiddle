@@ -9,20 +9,9 @@ else
 
 module.exports =
   class Component
-    class @NoDollarTopError extends Error
-      (fun-name) ->
-        @message = "you must pass in @$top to call #{fun-name}"
-
-    # @$top is a zepto/jquery selected div element on the client
-    # ... which we will render our output into and attach handlers to
-    #
-    # it is assumed that whater @$top is selecting.. that it is already
-    # in the dom ... not sure if handlers will attach correctly to something
-    # that is not in the active dom... MAYBE!?!?!?
-    #
-    # @$top is kinda intended for client only but it doesn't have to be...
-    (state, @$top) ->
+    (state, @selector) ->
       @r-state = {[k, $R.state v] for k,v of state}
+      @$top = $ @selector
 
       # calculate initial markup
       #
@@ -63,8 +52,5 @@ module.exports =
       # pre-calculate and store s
       @html = $c.html!
     put: !-> # put in @$top (client only)
-      if @$top
-        @$top.html @html
-      else
-        throw new NoDollarTopError \Component.put
+      @$top.html @html
 

@@ -19,9 +19,22 @@ module.exports =
       state <<< {scripts}
       super state, $top
 
+    children:
+      * new LangPane {flavors: [[\HTML \html]]} \#markup_pane
+      * new LangPane {flavors: [[\CSS \css]]} \#style_pane
+      * new LangPane {flavors: [[\JavaScript \javascript]]} \#code_pane
+
     template: templates.HomePage
 
     mutate: !($c, state) ->
-      (new LangPane {flavors: [[\HTML \html]]}, $c.find('#markup_pane')).put!
-      (new LangPane {flavors: [[\CSS \css]]}, $c.find('#style_pane')).put!
-      (new LangPane {flavors: [[\JavaScript \javascript]]}, $c.find('#code_pane')).put!
+      for c in @children
+        $c.find(c.selector).html c.html
+
+    attach: !->
+      for c in @children
+        c.attach!
+
+    detach: !->
+      for c in @children
+        c.detach!
+
