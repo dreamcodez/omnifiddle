@@ -13,9 +13,9 @@ title = 'foo'
     .tabs
       tab = {group: langUniqueId, title: asmTitle, class: 'input', checked: true}
       include tab
-        textarea.input
+        textarea.LangPane-input
 
       tab = {group: langUniqueId, title: asmTitle + ' (output)', class: 'output'}
       include tab
-        textarea.output(disabled=true)
+        textarea.LangPane-output(disabled=true)
 

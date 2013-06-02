@@ -10,25 +10,19 @@ debounce = lodash.debounce _, 250
 
 module.exports =
   class LangPane extends Component
-    ->
-      super ...
-
-      @merge-state {input: ''}
-
-      $R(-> console.log ...arguments).bind-to @r.input
-      # XXX: todo, create reactive fun out that turns it into output form
-      # then create another reactive fun which consumes the output and
-      # places it in the output pane
-      #
-      # and finally yet another reactive fun which binds also to the output
-      # and updates the preview pane
-
+    component-name: \LangPane
+    (...args) ->
+      opts = args.0 ||= {}
+      locals = opts.locals ||= {}
+      locals.input ||= ''
+      @r-input = $R.state(locals.input)
+      super ...args
     template: templates.LangPane
-    mutate: !($c, state) ->
-    attach: ->
-      r = @r
-      @$top.on \keyup \textarea.input debounce(->
-        r.input $(@).val!
-      )
-    detach: !->
-      @$top.off!
+    on-attach: ->
+      component = @
+      @$.on \keyup, \textarea.LangPane-input, debounce ->
+        new-val = $(@).val!
+        component.locals.input = new-val
+        component.r-input new-val
+    on-detach: ->
+      @$.off \keyup, \textarea.LangPane-input

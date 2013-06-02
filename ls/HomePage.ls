@@ -15,13 +15,18 @@ scripts =
 
 module.exports =
   class HomePage extends Component
-    ->
-      super ...
-      @merge-state {scripts}
-
-    children:
-      * new LangPane {flavors: [[\HTML \html]]} \#markup_pane
-      * new LangPane {flavors: [[\CSS \css]]} \#style_pane
-      * new LangPane {flavors: [[\JavaScript \javascript]]} \#code_pane
+    component-name: \HomePage
+    (...args) ->
+      opts = args.0 ||= {}
+      opts.locals  ||= {}
+      opts.locals <<< {scripts}
+      super ...args
 
     template: templates.HomePage
+
+    children: -> [
+      new LangPane {locals: {flavors: [[\HTML \html]]}} \#markup_pane @
+      new LangPane {locals: {flavors: [[\CSS \css]]}} \#style_pane @
+      new LangPane {locals: {flavors: [[\JavaScript \javascript]]}} \#code_pane @
+    ]
+
