@@ -21,8 +21,12 @@ module.exports =
     on-attach: ->
       component = @
       @$.on \keyup, \textarea.LangPane-input, debounce ->
-        new-val = $(@).val!
-        component.locals.input = new-val
-        component.r-input new-val
+        new-input = $(@).val!
+
+        # this condition guards any reactive binders from receiving
+        # non-genuine value changes
+        unless new-input is component.locals.input
+          component.locals.input = new-input
+          component.r-input new-input
     on-detach: ->
       @$.off \keyup, \textarea.LangPane-input
