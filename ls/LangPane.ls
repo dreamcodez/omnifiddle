@@ -11,22 +11,17 @@ debounce = lodash.debounce _, 250
 module.exports =
   class LangPane extends Component
     component-name: \LangPane
-    (...args) ->
-      opts = args.0 ||= {}
-      locals = opts.locals ||= {}
-      locals.input ||= ''
-      @r-input = $R.state(locals.input)
-      super ...args
+    ->
+      super ...
+      @r-input = $R.state @local(\input)
     template: templates.LangPane
     on-attach: ->
       component = @
       @$.on \keyup, \textarea.LangPane-input, debounce ->
         new-input = $(@).val!
-
         # this condition guards any reactive binders from receiving
         # non-genuine value changes
-        unless new-input is component.locals.input
-          component.locals.input = new-input
+        unless new-input is component.local(\input)
           component.r-input new-input
     on-detach: ->
       @$.off \keyup, \textarea.LangPane-input
