@@ -38,9 +38,9 @@ module.exports =
       @$preview-body.html @local(\markup)
     children: ->
       c =
-        markup: new LangPane {locals: {flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
-        style: new LangPane {locals: {flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
-        code: new LangPane {locals: {flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
+        markup: new LangPane {locals: {flavor: \html, flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
+        style: new LangPane {locals: {flavor: \css, flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
+        code: new LangPane {locals: {flavor: \js, flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
 
       $R(~>
         @locals.markup = it # update internal state
