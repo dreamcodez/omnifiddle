@@ -4,21 +4,21 @@ cp = require 'child_process'
 module.exports = (grunt) ->
   watchOptions =
     interrupt: false
-    debounceDelay: 35
+    debounceDelay: 250
 
   grunt.initConfig
     watch:
       jade:
         files: ['jade/*.jade']
-        tasks: ['clientjade']
+        tasks: ['clientjade', 'server']
         options: watchOptions
       javascript:
-        files: ['ls/*.ls', 'build/clientjade.js']
+        files: ['ls/*.ls']
         tasks: ['browserify', 'server']
         options: watchOptions
       stylus:
         files: ['styl/*.styl']
-        tasks: ['stylus']
+        tasks: ['stylus', 'server']
         options: watchOptions
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
