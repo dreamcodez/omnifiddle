@@ -24,5 +24,7 @@ module.exports =
 
     template: templates.HomePage
 
-    children: -> [new Tinker {} \#content @]
+    children: -> {
+      tinker: new Tinker {} \#content @
+    }
 

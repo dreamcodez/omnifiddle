@@ -32,9 +32,9 @@ module.exports =
         @@$ @$.find(\iframe.preview).0.content-window.document
       @$preview-head = @$preview-doc.find \head
       @$preview-body = @$preview-doc.find \body
-    children: -> [
-      new LangPane {locals: {flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
-      new LangPane {locals: {flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
-      new LangPane {locals: {flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
-    ]
+    children: -> {
+      markup: new LangPane {locals: {flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
+      style: new LangPane {locals: {flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
+      code: new LangPane {locals: {flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
+    }
 
