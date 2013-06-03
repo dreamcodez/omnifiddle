@@ -24,16 +24,6 @@ code-flavors =
 module.exports =
   class Tinker extends Component
     component-name: \Tinker
-    (...args) ->
-      opts = args.0 ||= {}
-      locals = opts.locals ||= {}
-      locals.markup ||= ''
-      locals.markup-flavor ||= \html
-      locals.style ||= ''
-      locals.style-flavor ||= \css
-      locals.code ||= ''
-      locals.code-flavor ||= \js
-      super ...args
     template: templates.Tinker
     put-head: -> @$preview-head.html it
     put-body: -> @$preview-body.html it
@@ -43,8 +33,8 @@ module.exports =
       @$preview-head = @$preview-doc.find \head
       @$preview-body = @$preview-doc.find \body
     children: -> [
-      new LangPane {locals: {flavors: markup-flavors}} \#markup_pane @
-      new LangPane {locals: {flavors: style-flavors}} \#style_pane @
-      new LangPane {locals: {flavors: code-flavors}} \#code_pane @
+      new LangPane {locals: {flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
+      new LangPane {locals: {flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
+      new LangPane {locals: {flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
     ]
 
