@@ -16,15 +16,11 @@ scripts =
 module.exports =
   class HomePage extends Component
     component-name: \HomePage
+    template: templates.HomePage
     (...args) ->
       opts = args.0 ||= {}
       opts.locals  ||= {}
       opts.locals <<< {scripts}
       super ...args
-
-    template: templates.HomePage
-
-    children: -> {
-      tinker: new Tinker {} \#content @
-    }
-
+      @children =
+        tinker: new Tinker {} \#content @

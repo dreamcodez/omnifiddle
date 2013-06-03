@@ -26,6 +26,30 @@ module.exports =
   class Tinker extends Component
     component-name: \Tinker
     template: templates.Tinker
+    ->
+      super ...
+
+      # required state
+      @state.markup ||= $R.state!
+      @state.style ||= $R.state!
+      @state.code ||= $R.state!
+
+      $R(~>
+        $pb.html(it) if $pb = @$preview-body
+      ).bind-to @state.markup
+
+      $R(~>
+        #@$preview-body.html(it)
+      ).bind-to @state.style
+
+      $R(~>
+        #@$preview-body.html(it)
+      ).bind-to @state.code
+
+      @children =
+        markup: new LangPane {locals: {flavor: \html, flavors: markup-flavors, input: @state.markup}} \#markup_pane @
+        style: new LangPane {locals: {flavor: \css, flavors: style-flavors, input: @state.style}} \#style_pane @
+        code: new LangPane {locals: {flavor: \js, flavors: code-flavors, input: @state.code}} \#code_pane @
     put-head: -> @$preview-head.html it
     put-body: -> @$preview-body.html it
     on-attach: ->
@@ -37,25 +61,5 @@ module.exports =
       # initial preview render
       @$preview-body.html @local(\markup)
     children: ->
-      c =
-        markup: new LangPane {locals: {flavor: \html, flavors: markup-flavors, input: ~> @locals.markup}} \#markup_pane @
-        style: new LangPane {locals: {flavor: \css, flavors: style-flavors, input: ~> @locals.style}} \#style_pane @
-        code: new LangPane {locals: {flavor: \js, flavors: code-flavors, input: ~> @locals.code}} \#code_pane @
-
-      $R(~>
-        @locals.markup = it # update internal state
-        @$preview-body.html(it)
-      ).bind-to c.markup.r-input
-
-      $R(~>
-        @locals.style = it # update internal state
-        #@$preview-body.html(it)
-      ).bind-to c.style.r-input
-
-      $R(~>
-        @locals.code = it # update internal state
-        #@$preview-body.html(it)
-      ).bind-to c.code.r-input
-
       return c
 

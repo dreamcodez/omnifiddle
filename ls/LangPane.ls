@@ -16,8 +16,7 @@ module.exports =
     component-name: \LangPane
     ->
       super ...
-      @r-input = $R.state @local(\input)
-      @r-output = $R.state!
+      @state.output = $R.state
     template: templates.LangPane
     mutate: ($c) ->
       $c.find(\select.flavor).val @local(\flavor)
@@ -26,6 +25,8 @@ module.exports =
       $out-tab = @$.find \.tab\.output
       component = @
 
+      #@$.on \change, \select.flavor, ->
+
       @$.on \keyup, \textarea.LangPane-input, debounce ->
         new-input = $(@).val!
         # this condition guards any reactive binders from receiving
@@ -33,10 +34,9 @@ module.exports =
         unless new-input is component.local(\input)
           flavor = component.local(\flavor)
           new-output = eval-lang(flavor, new-input)
-          component.r-input new-input
-          component.r-output new-output
+          component.state.input new-input
+          component.state.output new-output
 
-          console.log {flavor}
           if flavor in [\html \css \js]
             # source IS output in this case so hide extraneous UI
             $out-tab.hide!
