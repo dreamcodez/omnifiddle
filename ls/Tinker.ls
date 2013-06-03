@@ -60,6 +60,3 @@ module.exports =
 
       # initial preview render
       @$preview-body.html @local(\markup)
-    children: ->
-      return c
-
