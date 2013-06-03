@@ -2,20 +2,19 @@ langUniqueId = Math.random().toString().slice(2)
 asmTitle = flavors[0][0]
 title = 'foo'
 
-.LangPane
-  fieldset.pane
-    legend
-      label
-        span= title
-        select.flavor
-          each flavor in flavors
-            option(value=flavor[1])= flavor[0]
-    .tabs
-      tab = {group: langUniqueId, title: asmTitle, class: 'input', checked: true}
-      include tab
-        textarea.LangPane-input= input
+fieldset.pane
+  legend
+    label
+      span= title
+      select.flavor
+        each flavor in flavors
+          option(value=flavor[1])= flavor[0]
+  .tabs
+    tab = {group: langUniqueId, title: asmTitle, class: 'input', checked: true}
+    include tab
+      textarea.LangPane-input= input
 
-      tab = {group: langUniqueId, title: asmTitle + ' (output)', class: 'output'}
-      include tab
-        textarea.LangPane-output(disabled=true)
+    tab = {group: langUniqueId, title: asmTitle + ' (output)', class: 'output'}
+    include tab
+      textarea.LangPane-output(disabled=true)
 

@@ -1,6 +1,7 @@
 require! {
-  \./HomePage.ls
+  \./Tinker.ls
 }
 
 window.$R = require \reactivejs
-window.hp = new HomePage {} \#content
+window.component = {}
+window.component.tinker = new Tinker {} \#content

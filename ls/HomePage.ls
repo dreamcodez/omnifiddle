@@ -1,5 +1,5 @@
 require! \./Component.ls
-require! \./LangPane.ls
+require! \./Tinker.ls
 
 {templates} = require(\../build/clientjade.js)
 
@@ -24,9 +24,5 @@ module.exports =
 
     template: templates.HomePage
 
-    children: -> [
-      new LangPane {locals: {flavors: [[\HTML \html]]}} \#markup_pane @
-      new LangPane {locals: {flavors: [[\CSS \css]]}} \#style_pane @
-      new LangPane {locals: {flavors: [[\JavaScript \javascript]]}} \#code_pane @
-    ]
+    children: -> [new Tinker {} \#content @]
 
