@@ -1,5 +1,5 @@
 require! {
-  \./Component.ls
+  Component: yacomponent
   lodash
   $R: reactivejs
 }
@@ -14,9 +14,8 @@ debounce = lodash.debounce _, 250
 module.exports =
   class LangPane extends Component
     component-name: \LangPane
-    ->
-      super ...
-      @state.output = $R.state
+    init: ->
+      @local \output, null # always starts null, output will be result of evaluation on client-side (security)
     template: templates.LangPane
     mutate: ($c) ->
       $c.find(\select.flavor).val @local(\flavor)

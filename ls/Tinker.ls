@@ -1,5 +1,5 @@
 require! $R:reactivejs
-require! \./Component.ls
+require! Component:yacomponent
 require! \./LangPane.ls
 
 {templates} = require(\../build/clientjade.js)
@@ -26,13 +26,11 @@ module.exports =
   class Tinker extends Component
     component-name: \Tinker
     template: templates.Tinker
-    ->
-      super ...
-
+    init: ->
       # required state
-      @state.markup ||= $R.state!
-      @state.style ||= $R.state!
-      @state.code ||= $R.state!
+      @local \markup, '' if @local(\markup) is void
+      @local \style, '' if @local(\style) is void
+      @local \code, '' if @local(\code) is void
 
       $R(~>
         $pb.html(it) if $pb = @$preview-body

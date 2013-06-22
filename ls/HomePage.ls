@@ -1,4 +1,4 @@
-require! \./Component.ls
+require! Component:yacomponent
 require! \./Tinker.ls
 
 {templates} = require(\../build/clientjade.js)
@@ -17,10 +17,7 @@ module.exports =
   class HomePage extends Component
     component-name: \HomePage
     template: templates.HomePage
-    (...args) ->
-      opts = args.0 ||= {}
-      opts.locals  ||= {}
-      opts.locals <<< {scripts}
-      super ...args
+    init: ->
+      @local \scripts, scripts
       @children =
         tinker: new Tinker {} \#content @

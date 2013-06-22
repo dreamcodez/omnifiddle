@@ -14,5 +14,6 @@
   , "prelude-ls": "*"
   , "reactivejs": "http://github.com/mattbaker/Reactive.js/archive/master.tar.gz"
   , "shelljs": "*"
+  , "yacomponent": "https://github.com/dreamcodez/yacomponent/archive/master.tar.gz"
   }
 }
