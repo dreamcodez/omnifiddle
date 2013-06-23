@@ -1,11 +1,21 @@
 require! {
   Component: yacomponent
+  jade: \../node_modules/jade/lib/jade.js
   lodash
   $R: reactivejs
 }
 
 function eval-lang flavor, source
-  source # stub
+  switch flavor
+  case \jade
+    var out
+    # +self ensures we get an actual error if
+    # a variable binding does not exist in jade
+    jade.render source, {+self}, (err, res) ->
+      if err then throw err
+      out := res
+    out
+  default source # stub
 
 debounce = lodash.debounce _, 250
 
