@@ -30,10 +30,11 @@ module.exports =
         component.local \flavor, component.constructor.$(@).val!
 
       @$.on \keyup, \textarea.LangPane-input, debounce ->
+        new-val = @@$(@).val!
         # this condition guards any reactive binders from receiving
         # non-genuine value changes
-        unless new-input is component.local(\input)
-          component.state.input component.constructor.$(@).val!
+        unless new-val is component.local(\input)
+          component.state.input new-val
 
       @@$R((flavor) ->
         if flavor in [\html \css \js]

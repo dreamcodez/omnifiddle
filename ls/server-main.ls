@@ -1,1 +1,1 @@
-require \./server .run!
+require(\./server).run 7777
