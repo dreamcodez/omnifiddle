@@ -32,22 +32,15 @@ module.exports =
       @local \style, '' if @local(\style) is void
       @local \code, '' if @local(\code) is void
 
-      $R(~>
-        $pb.html(it) if $pb = @$preview-body
-      ).bind-to @state.markup
-
-      $R(~>
-        #@$preview-body.html(it)
-      ).bind-to @state.style
-
-      $R(~>
-        #@$preview-body.html(it)
-      ).bind-to @state.code
-
       @children =
         markup: new LangPane {locals: {flavor: \html, flavors: markup-flavors, input: @state.markup}} \#markup_pane @
         style: new LangPane {locals: {flavor: \css, flavors: style-flavors, input: @state.style}} \#style_pane @
         code: new LangPane {locals: {flavor: \js, flavors: code-flavors, input: @state.code}} \#code_pane @
+
+      $R((html) ~>
+        if $pb = @$preview-body
+          $pb.html html
+      ).bind-to @children.markup.state.output
     put-head: -> @$preview-head.html it
     put-body: -> @$preview-body.html it
     on-attach: ->
