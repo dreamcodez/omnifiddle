@@ -1,5 +1,5 @@
 require! Component:yacomponent
-require! \./Tinker.ls
+require! \./Tinker
 
 {templates} = require(\../build/clientjade.js)
 

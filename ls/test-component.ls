@@ -1,5 +1,5 @@
 require! {
-  \./component.ls
+  \./component
 }
 
 {templates} = require \../build/clientjade.js

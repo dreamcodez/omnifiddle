@@ -1,8 +1,7 @@
 { "name": "omnifiddle"
 , "version": "0.0.69"
 , "dependencies":
-  { "browserify": "*"
-  , "cheerio": "*"
+  { "cheerio": "*"
   , "clientjade": "*"
   , "connect": "*"
   , "express": "*"
@@ -13,6 +12,7 @@
   , "lodash": "*"
   , "prelude-ls": "*"
   , "reactivejs": "http://github.com/mattbaker/Reactive.js/archive/master.tar.gz"
+  , "requirejs": "*"
   , "shelljs": "*"
   , "yacomponent": "https://github.com/dreamcodez/yacomponent/archive/master.tar.gz"
   }

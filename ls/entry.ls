@@ -1,9 +1,9 @@
 require! {
-  \./Tinker.ls
+  \./Tinker
   reactivejs
 }
 
-window.jade = require \../node_modules/jade/lib/jade.js
+window.jade = require \../node_modules/jade/lib/jade
 
 window.$R = reactivejs
 window.component = {}

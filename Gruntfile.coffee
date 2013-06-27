@@ -14,7 +14,7 @@ module.exports = (grunt) ->
         options: watchOptions
       javascript:
         files: ['ls/*.ls']
-        tasks: ['browserify', 'server']
+        tasks: ['livescript', 'server']
         options: watchOptions
       stylus:
         files: ['styl/*.styl']
@@ -23,8 +23,8 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'browserify', 'generate browser js bundle', ->
-    exec 'node_modules/.bin/browserify -i cheerio -d -t liveify ls/entry.ls -o public/js/app.js'
+  grunt.registerTask 'livescript', 'compile all livescript', ->
+    exec 'lsc -ck ls'
 
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
@@ -45,6 +45,6 @@ module.exports = (grunt) ->
     child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
     console.log "\n  [ #{serious} ] Server started SIR! #{JSON.stringify(pid: child.pid)}"
 
-  grunt.registerTask 'all', ['clientjade', 'browserify', 'stylus', 'server']
+  grunt.registerTask 'all', ['clientjade', 'stylus', 'livescript', 'server']
 
   grunt.registerTask 'default', ['all', 'watch']

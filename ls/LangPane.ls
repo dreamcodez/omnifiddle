@@ -1,6 +1,6 @@
 require! {
   Component: yacomponent
-  jade: \../node_modules/jade/lib/jade.js
+  jade: \../node_modules/jade/lib/jade
   lodash
   $R: reactivejs
 }

@@ -1,2 +1,2 @@
 #!/bin/sh -e
-lsc -k ls/server-main
+node ls/server-main

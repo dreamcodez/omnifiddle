@@ -1,8 +1,8 @@
 require! $R:reactivejs
 require! Component:yacomponent
-require! \./LangPane.ls
+require! \./LangPane
 
-{templates} = require(\../build/clientjade.js)
+{templates} = require(\../build/clientjade)
 
 markup-flavors =
   * [\HTML \html]
