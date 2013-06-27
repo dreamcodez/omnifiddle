@@ -1,3 +1,5 @@
 #!/bin/sh -e
 mkdir -p build
-node_modules/.bin/clientjade jade | sed "1,/jade/s/jade/module.exports = jade/" > build/clientjade.js
+echo "define(function(){\n" > build/clientjade.js
+node_modules/.bin/clientjade jade >> build/clientjade.js
+echo "\nreturn jade;});" >> build/clientjade.js

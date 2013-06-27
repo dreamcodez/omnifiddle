@@ -3,10 +3,6 @@ html
   head
     title Main
     link(rel='stylesheet', type='text/css', href='/css/app.css')
-    script(type='text/javascript', src='/js/head.load.js')
-    |<script type="text/javascript">
-    |  head.js.apply(head, !{JSON.stringify(scripts)});
-    |</script>
   body
     #content
       #markup_pane
@@ -15,3 +11,8 @@ html
       fieldset.pane
         legend Preview
         iframe.preview
+    - var requireConfig = {packages: packages};
+    |<script type="text/javascript">
+    |  var require = !{JSON.stringify(requireConfig)};
+    |</script>
+    script(data-main='app/entry.js', src='//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js')

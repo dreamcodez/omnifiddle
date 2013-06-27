@@ -1,28 +1,30 @@
-require! $R:reactivejs
-require! Component:yacomponent
-require! \./LangPane
+define (require) ->
+  require! {
+    $R:reactivejs
+    Component:yacomponent
+    LangPane
+  }
 
-{templates} = require(\../build/clientjade)
+  {templates} = require \../build/clientjade
 
-markup-flavors =
-  * [\HTML \html]
-  * [\Jade \jade]
+  markup-flavors =
+    * [\HTML \html]
+    * [\Jade \jade]
 
-style-flavors =
-  * [\CSS \css]
-  * [\Stylus \styl]
+  style-flavors =
+    * [\CSS \css]
+    * [\Stylus \styl]
 
-code-flavors =
-  * [\JavaScript \js]
-  * [\CoffeeScript \coffee]
-  * [\LiveScript \ls]
-  * [\Roy \roy]
-  * [\ClojureScript \clj]
-  * [\LOLcode \lol]
-  * [\Brainfuck \bf]
-  * [\Malbolge \malbolge]
+  code-flavors =
+    * [\JavaScript \js]
+    * [\CoffeeScript \coffee]
+    * [\LiveScript \ls]
+    * [\Roy \roy]
+    * [\ClojureScript \clj]
+    * [\LOLcode \lol]
+    * [\Brainfuck \bf]
+    * [\Malbolge \malbolge]
 
-module.exports =
   class Tinker extends Component
     component-name: \Tinker
     template: templates.Tinker

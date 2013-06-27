@@ -1,27 +1,27 @@
-require! {
-  Component: yacomponent
-  jade: \../node_modules/jade/lib/jade
-  lodash
-  $R: reactivejs
-}
+define (require) ->
+  require! {
+    Component: yacomponent
+    jade
+    lodash
+    $R: reactivejs
+  }
 
-function eval-lang flavor, source
-  switch flavor
-  case \jade
-    var out
-    # +self ensures we get an actual error if
-    # a variable binding does not exist in jade
-    jade.render source, {+self}, (err, res) ->
-      if err then throw err
-      out := res
-    out
-  default source # stub
+  function eval-lang flavor, source
+    switch flavor
+    case \jade
+      var out
+      # +self ensures we get an actual error if
+      # a variable binding does not exist in jade
+      jade.render source, {+self}, (err, res) ->
+        if err then throw err
+        out := res
+      out
+    default source # stub
 
-debounce = lodash.debounce _, 250
+  debounce = lodash.debounce _, 250
 
-{templates} = require(\../build/clientjade.js)
+  {templates} = require \../build/clientjade
 
-module.exports =
   class LangPane extends Component
     component-name: \LangPane
     init: ->

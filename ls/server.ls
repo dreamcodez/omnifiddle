@@ -1,11 +1,9 @@
 require! {
   connect
   express
-  cj: '../build/clientjade'
-  \./HomePage
+  requirejs
 }
-
-t = cj.templates
+HomePage = requirejs \./HomePage
 
 max-age = 0ms
 

@@ -1,6 +1,7 @@
 *.log
 /build/
 /node_modules/
-/public/js/app.js
 /public/css/app.css
+/public/js/app.js
+/public/packages/
 /ls/*.js

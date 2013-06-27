@@ -1,0 +1,6 @@
+#!/bin/sh -e
+rm -rf public/packages/*
+node_modules/.bin/r.js -convert node_modules/lodash public/packages/lodash
+node_modules/.bin/r.js -convert node_modules/reactivejs public/packages/reactivejs
+node_modules/.bin/r.js -convert node_modules/yacomponent public/packages/yacomponent
+node_modules/.bin/r.js -convert node_modules/jade public/packages/jade
