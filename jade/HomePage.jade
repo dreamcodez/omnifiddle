@@ -11,8 +11,4 @@ html
       fieldset.pane
         legend Preview
         iframe.preview
-    - var requireConfig = {packages: packages};
-    |<script type="text/javascript">
-    |  var require = !{JSON.stringify(requireConfig)};
-    |</script>
     script(data-main='app/entry.js', src='//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.5/require.min.js')

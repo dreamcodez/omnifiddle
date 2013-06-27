@@ -21,22 +21,26 @@ require.config {
 }
 
 define (require) ->
+  # yacomponent currently assumes $ on window
+  # window.$ must be present before yacomponent is loaded
+  require! zepto
+  window.$ = zepto
+
   require! {
-    #jade
+    jade
     lodash
     reactivejs
     yacomponent
-    zepto
   }
+
   # components
   require! {
     Tinker
   }
 
-  window.$ = zepto
   window.$R = reactivejs
   window.__ = lodash
-  #window.jade = jade
+  window.jade = jade
 
   window.component = {}
   window.component.tinker = new Tinker {-auto-render} \#content
