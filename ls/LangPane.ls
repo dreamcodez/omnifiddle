@@ -1,3 +1,4 @@
+define = window?define or require(\amdefine) module
 define (require) ->
   require! {
     Component: yacomponent

@@ -1,6 +1,14 @@
 #!/bin/sh -e
+
+# prep
+mkdir -p public/packages
 rm -rf public/packages/*
+
+# convert these, they have no direct amd support
 node_modules/.bin/r.js -convert node_modules/lodash public/packages/lodash
 node_modules/.bin/r.js -convert node_modules/reactivejs public/packages/reactivejs
-node_modules/.bin/r.js -convert node_modules/yacomponent public/packages/yacomponent
 node_modules/.bin/r.js -convert node_modules/jade public/packages/jade
+
+# these libraries have direct amd support
+pushd public/packages
+ln -s ../../node_modules/yacomponent .

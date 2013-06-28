@@ -1,5 +1,6 @@
 #!/bin/sh -e
 mkdir -p build
-echo "define(function(){\n" > build/clientjade.js
+echo "if (typeof define !== 'function') { var define = require('amdefine')(module) }\n" > build/clientjade.js
+echo "define(function(){\n" >> build/clientjade.js
 node_modules/.bin/clientjade jade >> build/clientjade.js
-echo "\nreturn jade;});" >> build/clientjade.js
+echo "\nreturn jade;});\n" >> build/clientjade.js

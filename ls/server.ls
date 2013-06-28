@@ -1,9 +1,9 @@
 require! {
   connect
   express
-  requirejs
+  amdefine
+  \./HomePage
 }
-HomePage = requirejs \./HomePage
 
 max-age = 0ms
 

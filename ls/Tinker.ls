@@ -1,8 +1,9 @@
+define = window?define or require(\amdefine) module
 define (require) ->
   require! {
     $R:reactivejs
     Component:yacomponent
-    LangPane
+    \./LangPane
   }
 
   {templates} = require \../build/clientjade

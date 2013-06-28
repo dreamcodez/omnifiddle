@@ -11,7 +11,6 @@ require.config {
       main: \src/reactive.js
       location: \../packages/reactivejs
     * name: \yacomponent
-      main: \Component.js
       location: \../packages/yacomponent
     * name: \jade
       main: \jade.js
