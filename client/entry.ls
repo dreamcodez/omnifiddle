@@ -34,7 +34,7 @@ define (require) ->
 
   # components
   require! {
-    Tinker
+    \../ui/Tinker
   }
 
   window.$R = reactivejs

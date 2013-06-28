@@ -12,9 +12,21 @@ module.exports = (grunt) ->
         files: ['jade/*.jade']
         tasks: ['clientjade', 'server']
         options: watchOptions
-      javascript:
-        files: ['ls/*.ls']
-        tasks: ['livescript', 'server']
+      clientJS:
+        files: ['client/*.ls']
+        tasks: ['clientJS']
+        options: watchOptions
+      serverJS:
+        files: ['server/*.ls']
+        tasks: ['serverJS', 'server']
+        options: watchOptions
+      sharedJS:
+        files: ['shared/*.ls']
+        tasks: ['sharedJS', 'server']
+        options: watchOptions
+      uiJS:
+        files: ['ui/*.ls']
+        tasks: ['uiJS', 'server']
         options: watchOptions
       stylus:
         files: ['styl/*.styl']
@@ -23,8 +35,10 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'livescript', 'compile all livescript', ->
-    exec 'lsc -ck ls'
+  grunt.registerTask 'clientJS', 'client livescript', -> exec 'lsc -ck client'
+  grunt.registerTask 'serverJS', 'server livescript', -> exec 'lsc -ck server'
+  grunt.registerTask 'sharedJS', 'shared livescript', -> exec 'lsc -ck shared'
+  grunt.registerTask 'uiJS', 'ui livescript', -> exec 'lsc -ck ui'
 
   grunt.registerTask 'clientjade', 'generate jade template bundle', ->
     exec 'bin/build-clientjade'
@@ -45,6 +59,6 @@ module.exports = (grunt) ->
     child = cp.spawn 'bin/server', [], {detached: true, stdio: 'inherit'}
     console.log "\n  [ #{serious} ] Server started SIR! #{JSON.stringify(pid: child.pid)}"
 
-  grunt.registerTask 'all', ['clientjade', 'stylus', 'livescript', 'server']
+  grunt.registerTask 'all', ['clientjade', 'stylus', 'clientJS', 'serverJS', 'sharedJS', 'uiJS', 'server']
 
   grunt.registerTask 'default', ['all', 'watch']

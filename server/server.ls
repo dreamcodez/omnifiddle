@@ -2,7 +2,7 @@ require! {
   connect
   express
   amdefine
-  \./HomePage
+  \../ui/HomePage
 }
 
 max-age = 0ms

@@ -2,6 +2,8 @@
 /build/
 /node_modules/
 /public/css/app.css
-/public/js/app.js
 /public/packages/
-/ls/*.js
+/client/*.js
+/server/*.js
+/shared/*.js
+/ui/*.js
